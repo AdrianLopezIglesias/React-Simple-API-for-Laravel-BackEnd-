@@ -1,0 +1,108 @@
+.row {
+    display: flex;
+  }
+  
+  .imagen-objetos {
+    display: block;
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+  }
+  .map-object:hover {
+    background-color:rgba(50, 50, 50, 0.4);;
+  }
+  .map-object{
+    width: 45px;
+    height: 45px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+  }
+  .map-tile {
+    width: 7px;
+    height: 7px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  .lr1 {
+    position: relative;
+    background: gray;
+  }
+  .dsw {
+    position: relative;
+    background: LightSeaGreen;
+  }
+  .ssw {
+    position: relative;
+    background: MediumAquaMarine;
+  }
+  .lsb {
+    position: relative;
+    background: wheat;
+  }
+  .lg1 {
+    position: relative;
+    background: forestgreen;
+  }
+  .lf1 {
+    position: relative;
+    background: darkgreen;
+  }
+  
+  .selected {
+    border: 1px solid white;
+    width: 42px !important;
+    height: 42px !important;  
+    animation: glow 1s infinite alternate;
+  }
+  
+  .movement-area {
+      animation: glow2 1s infinite alternate;
+  }
+  
+  @keyframes glow {
+    from {
+      background-color:rgba(0, 0, 0, 0.0);;
+    }
+    to {
+      background-color:rgba(255, 255, 255, 0.4);;
+    }
+  }
+  
+  @keyframes glow2 {
+    from {
+      background-color:rgba(0, 0, 0, 0.0);;
+    }
+    to {
+      background-color:rgba(100, 255, 100, 0.2);;
+    }
+  }
+  
+  .map {
+    height: 200px;
+    width: 100%;
+    overflow: scroll;
+    position: relative;
+    
+  }
+  
+  #map-core {
+      position: absolute;
+  
+    z-index:1
+  }
+  #map-objects {
+  
+      position: absolute;
+      z-index:3;
+  }
+  
+  .panel-bottom{
+    display: flex;
+    flex-direction: column;
+    
+  }
