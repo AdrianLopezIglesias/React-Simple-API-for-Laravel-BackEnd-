@@ -5,8 +5,14 @@ export class Game extends React.Component {
     super(props);
     this.state = {
       view: "1",
-      notas: []
+      notas: [],
+      loggedIn: false,
     };
+  }
+  SetLoggedIn(){
+      this.setState({
+          loggedIn: true
+      })
   }
   ChangeView(view) {
     this.setState({ 

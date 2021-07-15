@@ -92,8 +92,18 @@ export class VistaInput extends React.Component {
         this.nuevaNota = this.nuevaNota.bind(this);
     }
     async getTodos() {
-        axios
-            .get(`http://webpersonal/api/notas`)
+        const config = {
+            headers: { Authorization: `Bearer 14|rfFORj0lcfBZBE8XKv32TWygBfmmqssiJ1WsF0cz` }
+        };
+        const bodyParameters = {
+           key: "",
+           notas: this.state.notas
+        };        
+        axios.get(
+            'http://webpersonal/api/notas', 
+            bodyParameters,
+            config
+        )
             .then(response => {
                 this.setState({
                     notas: JSON.parse(response.data)
@@ -150,10 +160,21 @@ export class VistaInput extends React.Component {
             this.guardarNuevaNota(this.state.value);
         }
 
-        axios.put('http://webpersonal/api/notas/1', {
-            notas: this.state.notas
-        })
+        const config = {
+            headers: { Authorization: `Bearer 14|rfFORj0lcfBZBE8XKv32TWygBfmmqssiJ1WsF0cz` }
+        };
+        const bodyParameters = {
+           key: "",
+           notas: this.state.notas
+        };        
+        const access_token = '14|rfFORj0lcfBZBE8XKv32TWygBfmmqssiJ1WsF0cz';
+        axios.put(
+            'http://webpersonal/api/notas/1', 
+            bodyParameters,
+            config
+        )
             .then(function (response) {
+                console.log(response);
             })
             .catch(function (error) {
             });
@@ -174,6 +195,30 @@ export class VistaInput extends React.Component {
         return (
             <div>
                 <div className="container-fluid">
+                <div className="dropdown">
+                        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Opciones
+                        </button>
+                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a className="dropdown-item" onClick={this.nuevaNota} href="#">
+                                    Nueva nota
+                                </a>
+                            </li>
+                            <li> 
+                                <a className="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                                    Ver notas guardadas
+                                </a>
+                            </li>
+                            <li>
+                                <a className="dropdown-item" 
+                            onClick={this.nuevaNota} href="#">
+                                Eliminar nota
+                                </a>    
+                            </li>
+                           
+                        </ul>
+                    </div>
                 <textarea 
                     onChange={this.handleChange}
                     value={this.state.value}
@@ -181,14 +226,18 @@ export class VistaInput extends React.Component {
                     className="main-text-input form-control">
                 </textarea>
                 <div className="row">  
-                    <div className="col-6  d-grid gap-2">
-                        <button
-                            className="btn btn-outline-secondary btn-block"
-                            onClick={this.guardarNota}
-                            type="submit">
-                            Guardar
-                        </button>
-                    </div>
+                   {/*
+                        <div className="col-6  d-grid gap-2"> 
+                            <button
+                                className="btn btn-outline-secondary btn-block"
+                                onClick={this.guardarNota}
+                                type="submit">
+                                Guardar
+                            </button>
+                        </div>
+                    */}
+
+                    {/*
                     <div className="col-6 d-grid gap-2">
                         <button 
                             className="btn btn-outline-secondary  btn-block"
@@ -197,13 +246,23 @@ export class VistaInput extends React.Component {
                             Nueva
                         </button>
                     </div>
+                    */}
                 </div>
-                                   
-                <ListaNotas
-                    onSeleccionNota={this.handleNotaSelection}
-                    seleccion={this.state.seleccion}
-                    notas={this.state.notas}
-                />
+                <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div className="offcanvas-header">
+                    <h5 className="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+                    <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div className="offcanvas-body">
+                    <ListaNotas
+                        onSeleccionNota={this.handleNotaSelection}
+                        seleccion={this.state.seleccion}
+                        notas={this.state.notas}
+                    />
+                </div>
+                </div>
+                                                
+
                 </div>
 
             </div>
